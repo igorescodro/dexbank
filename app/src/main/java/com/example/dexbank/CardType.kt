@@ -3,6 +3,7 @@ package com.example.dexbank
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.KeyboardArrowUp
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.ui.graphics.vector.ImageVector
 
@@ -29,5 +30,11 @@ enum class CardType(
         title = "Empréstimo",
         body = "Valor dispnonível",
         value = "R$ 200.000,00"
+    ),
+    Insurance(
+        icon = Icons.Outlined.KeyboardArrowUp,
+        title = "Seguro",
+        body = "Valor assegurado",
+        value = "R$ 100.000,00"
     )
 }

@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">DexBank</string>
+
+    <string name="main_bottom_card_title_pix">Pix</string>
+    <string name="main_bottom_card_title_payment">Pagar</string>
+    <string name="main_bottom_card_title_share">Indicar amigos</string>
+    <string name="main_bottom_card_title_transfer">Transferir</string>
+    <string name="main_bottom_card_title_deposit">Depositar</string>
+    <string name="main_bottom_card_title_loan">Empréstimos</string>
+    <string name="main_bottom_card_title_digital_card">Cartão Virtual</string>
 </resources>
