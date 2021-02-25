@@ -2,6 +2,7 @@ package com.example.dexbank
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -9,13 +10,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
-import androidx.compose.foundation.layout.preferredSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
@@ -30,7 +32,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,7 +45,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     backgroundColor = MaterialTheme.colors.primary,
                     topBar = { DexToolbar() },
-                    bodyContent = {
+                    content = {
                         val list = CardType.values().toList()
                         DexMainList(cardList = list)
                     }
@@ -56,8 +57,12 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun DexMainList(cardList: List<CardType>) {
-    LazyColumnFor(items = cardList) { card ->
-        DexMainCard(cardType = card)
+    LazyColumn {
+        items(
+            items = cardList, itemContent = { card ->
+                DexMainCard(cardType = card)
+            }
+        )
     }
 }
 
@@ -66,7 +71,7 @@ fun DexMainCard(cardType: CardType) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .preferredHeight(168.dp)
+            .height(168.dp)
             .padding(8.dp)
             .clickable(onClick = { /*TODO*/ })
     ) {
@@ -78,7 +83,8 @@ fun DexMainCard(cardType: CardType) {
             Row {
                 Icon(
                     imageVector = cardType.icon,
-                    modifier = Modifier.preferredSize(32.dp)
+                    contentDescription = "Card",
+                    modifier = Modifier.size(32.dp)
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 Text(
@@ -103,8 +109,11 @@ fun DexMainCard(cardType: CardType) {
 
 @Composable
 fun DexToolbar() {
-    TopAppBar(modifier = Modifier.preferredHeight(100.dp)) {
-        Row(modifier = Modifier.fillMaxHeight(), verticalAlignment = Alignment.CenterVertically) {
+    TopAppBar(modifier = Modifier.height(100.dp)) {
+        Row(
+            modifier = Modifier.fillMaxHeight(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Text(
                 text = "Olá, Guilda",
                 style = MaterialTheme.typography.h5.copy(fontWeight = FontWeight.Bold)
@@ -120,12 +129,12 @@ fun DexToolbarButton() {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
-            .preferredSize(56.dp)
+            .size(56.dp)
             .clip(CircleShape)
             .background(MaterialTheme.colors.primaryVariant)
     ) {
         IconButton(onClick = { /*TODO*/ }) {
-            Icon(imageVector = Icons.Outlined.Notifications)
+            Icon(imageVector = Icons.Outlined.Notifications, contentDescription = "Action button")
         }
     }
 }
